@@ -93,13 +93,8 @@
     <div class="container">
         <div id="#a"></div>
         <div class="row">
-            <div class="col-sm-2">
-                <h2>Colores</h2>
-            </div>
             <div class="col-sm">
-                <button class="btn btn-primary" onclick="upOCData('cColor')" data-bs-id="" data-bs-name=""
-                    data-bs-red="" data-bs-green="" data-bs-blue="" data-bs-toggle="modal"
-                    data-bs-target="#changeColor">Añadir color</button>
+                <h2>Colores</h2>
             </div>
             <div class="row">
                 <div class="col-sm">
@@ -120,15 +115,15 @@
             </div>
             <div class="row" id="colors"></div>
         </div>
+		<div class="row">
+			<button class="btn btn-primary" onclick="upOCData('cColor')" data-bs-id="" data-bs-name=""
+				data-bs-red="" data-bs-green="" data-bs-blue="" data-bs-toggle="modal"
+				data-bs-target="#changeColor">Añadir color</button>
+		</div>
         <br><br>
         <div class="row">
             <div class="col-sm-2">
                 <h2>Productos</h2>
-            </div>
-            <div class="col-sm">
-                <button data-bs-id="" data-bs-producto="" data-bs-cantidad="" data-bs-precio="" class="btn btn-primary"
-                    data-bs-toggle="modal" data-bs-target="#changeProduct" onclick="upOCData('cProduct')">Añadir
-                    producto</button>
             </div>
             <div class="row">
                 <div class="col-sm">
@@ -140,7 +135,7 @@
                 <div class="col-sm">
                     <h3>Precio</h3>
                 </div>
-                <div class="col-sm">
+                <div class="col-4">
                     <h3>Colores</h3>
                 </div>
                 <div class="col-sm">
@@ -152,6 +147,11 @@
             </div>
             <div class="row" id="products"></div>
         </div>
+		<div class="row">
+			<button data-bs-id="" data-bs-producto="" data-bs-cantidad="" data-bs-precio="" class="btn btn-primary"
+				data-bs-toggle="modal" data-bs-target="#changeProduct" onclick="upOCData('cProduct')">Añadir
+				producto</button>
+		</div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="js/socket.io.js"></script>

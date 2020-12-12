@@ -1,12 +1,33 @@
-td .color{
-    height: 100%;
-    padding: 0%;
+*{
+	margin:0;
+	padding: 0;
+}
+.row{
+	text-align: center; 
+	align-items: center; 
+	justify-content: center;
+	background-color:#FFFFFF;
+	margin-bottom: 15px;
+}
+
+.col-sm-2{
+	padding: 25px;
+	background-color:#FFFFFF;
+}
+
+h3{
+	padding: 10px;
+	background-color:#D4D4D4;
+	border-radius: 5px;
 }
 
 div .color{
-    width: 100%;
+    width: 80%;
+	border-radius: 5%;
     height: 32px;
     margin: 0;
     position: relative;
     display: inline-block;
+	margin-bottom: 5px;
+	border: 1px solid #000000;
 }

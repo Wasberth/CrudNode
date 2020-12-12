@@ -1,4 +1,4 @@
-var socket = io.connect('http://189.241.248.154:25565', { 'forceNew': true });
+var socket = io.connect('http://localhost:25565', { 'forceNew': true });
 
 var recentData = undefined;
 var deleteData = undefined;
@@ -153,7 +153,7 @@ render = function () {
                 <div class="row">
                     <div class="col-sm"><h6>${color.nombre}</h6></div>
                     <div class="col-sm"><h6>${color.rgb}</h6></div>
-                    <div class="col-sm color" style="background-color: rgb${color.rgb};"></div>
+                    <div class="col-sm"><div class="color" style="background-color: rgb${color.rgb};"></div></div>
                     <div class="col-sm">
                         <button onclick="upOCData('eColor')" data-bs-id="${color.id}" data-bs-name="${color.nombre}" data-bs-red="${color.r}" data-bs-green="${color.g}" data-bs-blue="${color.b}" type="button" class="btn btn-primary mx-auto" data-bs-toggle="modal" data-bs-target="#changeColor">
                             Modificar
@@ -172,9 +172,9 @@ render = function () {
                     <div class="col-sm"><h6>${producto.producto}</h6></div>
                     <div class="col-sm"><h6>${producto.cantidad}</h6></div>
                     <div class="col-sm"><h6>${producto.precio}</h6></div>
-                    <div class="col-sm">
-                        ${producto.colors.map(color => `<div class="col-sm color" style="background-color: rgb${color.rgb};">
-                            <span style="color: rgb(${255 - Number(color.r)}, ${255 - Number(color.g)}, ${255 - Number(color.b)})">${color.nombre}</span>
+                    <div class="col-4">
+                        ${producto.colors.map(color => `<div class="color" style="background-color: rgb${color.rgb};">
+                            <span style="color: ${(Number(color.r) + (1.7 * Number(color.g)) + Number(color.b))/3 > 128? 'black' : 'white'}">${color.nombre}</span>
                         </div>`).join('\n')}</div>
                     <div class="col-sm">
                         <button onclick="upOCData('eProduct')" data-bs-id="${producto.id}" data-bs-producto="${producto.producto}" data-bs-cantidad="${producto.cantidad}" data-bs-precio="${producto.precio}" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#changeProduct">

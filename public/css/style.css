@@ -1,0 +1,12 @@
+td .color{
+    height: 100%;
+    padding: 0%;
+}
+
+div .color{
+    width: 100%;
+    height: 32px;
+    margin: 0;
+    position: relative;
+    display: inline-block;
+}

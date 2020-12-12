@@ -1,0 +1,108 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema SimpleDB
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema SimpleDB
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `SimpleDB` ;
+USE `SimpleDB` ;
+
+-- -----------------------------------------------------
+-- Table `SimpleDB`.`MProducto`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `SimpleDB`.`MProducto` ;
+
+CREATE TABLE IF NOT EXISTS `SimpleDB`.`MProducto` (
+  `id_prd` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `nom_prd` VARCHAR(45) NOT NULL,
+  `cnt_prd` INT UNSIGNED NOT NULL,
+  `prc_prd` DECIMAL UNSIGNED NOT NULL,
+  PRIMARY KEY (`id_prd`))
+ENGINE = InnoDB AUTO_INCREMENT = 1;
+
+
+-- -----------------------------------------------------
+-- Table `SimpleDB`.`MColor`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `SimpleDB`.`MColor` ;
+
+CREATE TABLE IF NOT EXISTS `SimpleDB`.`MColor` (
+  `id_col` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `nom_col` VARCHAR(45) NOT NULL,
+  `red_col` TINYINT UNSIGNED NOT NULL,
+  `grn_col` TINYINT UNSIGNED NOT NULL,
+  `blu_col` TINYINT UNSIGNED NOT NULL,
+  PRIMARY KEY (`id_col`))
+ENGINE = InnoDB AUTO_INCREMENT = 1;
+
+
+-- -----------------------------------------------------
+-- Table `SimpleDB`.`EColorProducto`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `SimpleDB`.`EColorProducto` ;
+
+CREATE TABLE IF NOT EXISTS `SimpleDB`.`EColorProducto` (
+  `id_prd` INT UNSIGNED NOT NULL,
+  `id_col` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`id_col`, `id_prd`),
+  INDEX `producto_idx` (`id_prd` ASC) VISIBLE,
+  CONSTRAINT `color`
+    FOREIGN KEY (`id_col`)
+    REFERENCES `SimpleDB`.`MColor` (`id_col`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `producto`
+    FOREIGN KEY (`id_prd`)
+    REFERENCES `SimpleDB`.`MProducto` (`id_prd`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+-- ALTER TABLE `MColor` AUTO_INCREMENT = 1;
+-- ALTER TABLE `MProducto` AUTO_INCREMENT = 1;
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+INSERT INTO `SimpleDB`.`MColor` (`red_col`, `grn_col`, `blu_col`, `nom_col`) VALUES
+(  0,   0,   0, 'Negro'),
+(255,   0,   0, 'Rojo'),
+(  0, 255,   0, 'Verde'),
+(  0,   0, 255, 'Azul'),
+(255,  69,   0, 'Naranja'),
+(255, 255,  42, 'Amarillo'),
+(135, 206, 235, 'Celeste'),
+(  0, 139, 139, 'Cian'),
+(211, 211, 211, 'Gris claro'),
+(169, 169, 169, 'Gris oscuro'),
+(165,  42,  42, 'Café'),
+(138,  43, 226, 'Violeta'),
+(220,  20,  60, 'Carmesí'),
+(184, 134,  11, 'Oro');
+
+INSERT INTO `SimpleDB`.`MProducto` (`nom_prd`, `cnt_prd`, `prc_prd`) VALUES
+('Playera', 6000, 45.00),
+('Playera con dibujo', 500, 70.00);
+
+INSERT INTO `SimpleDB`.`EColorProducto` (`id_prd`, `id_col`) VALUES
+(1, 1), (1, 2), (1, 3), (1, 5), (1, 14),
+(2, 1), (2, 5), (2, 7), (2, 9), (2, 13);
+
+SELECT `SimpleDB`.`MProducto`.* FROM `SimpleDB`.`MProducto`;
+
+SELECT 
+	`SimpleDB`.`MColor`.*
+FROM 
+	`SimpleDB`.`MProducto`, `SimpleDB`.`MColor`, `SimpleDB`.`EColorProducto`
+WHERE
+	`SimpleDB`.`MProducto`.`id_prd` = `SimpleDB`.`EColorProducto`.`id_prd` AND
+	`SimpleDB`.`MColor`.`id_col` = `SimpleDB`.`EColorProducto`.`id_col` AND
+	`SimpleDB`.`MProducto`.`nom_prd` = 'Playera';

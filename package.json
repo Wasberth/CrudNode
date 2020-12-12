@@ -1,0 +1,22 @@
+{
+  "name": "crudnode",
+  "version": "1.0.0",
+  "description": "Un CRUD con Nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Willy",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^3.2.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "mysql": "^2.18.1",
+    "socket.io": "^3.0.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
